@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aéropostale Rewards</title>
+<style>
+  :root{
+    --brand:#172b4d;
+    --accent:#c62d3b;
+    --dark:#172b4d;
+    --text:#26354a;
+    --muted:#6b7280;
+    --border:#dfe5ee;
+    --card:#ffffff;
+    --bg1:#eef1f6;
+    --bg2:#ffffff;
+    --shadow:0 18px 40px rgba(15,23,42,.08);
+    --soft:0 6px 18px rgba(15,23,42,.04);
+  }
+
+  *{
+    box-sizing:border-box;
+  }
+
+  html,body{
+    margin:0;
+    padding:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(circle at top, rgba(23,43,77,.10), transparent 30%),
+      linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 42%);
+    color:var(--text);
+  }
+
+  .wrap{
+    padding:18px 12px 26px;
+  }
+
+  .container{
+    max-width:430px;
+    margin:0 auto;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(223,229,238,.9);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    padding:22px 18px 18px;
+    text-align:center;
+  }
+
+  .brand{
+    font-size:clamp(24px,7vw,32px);
+    font-weight:800;
+    letter-spacing:.055em;
+    text-transform:uppercase;
+    color:var(--brand);
+  }
+
+  .brand-underline{
+    width:64px;
+    height:3px;
+    border-radius:999px;
+    background:linear-gradient(90deg,var(--brand) 0 45%,#ffffff 45% 55%,var(--accent) 55% 100%);
+    margin:10px auto 18px;
+  }
+
+  h1{
+    font-size:30px;
+    line-height:1.05;
+    margin:0 0 10px;
+    font-weight:900;
+    letter-spacing:-.03em;
+    color:var(--dark);
+  }
+
+  .sub{
+    font-size:13px;
+    line-height:1.5;
+    color:var(--muted);
+    margin:0 0 18px;
+  }
+
+  .steps{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .step{
+    display:flex;
+    gap:10px;
+    padding:12px;
+    border-radius:16px;
+    border:1px solid var(--border);
+    background:linear-gradient(180deg,#ffffff 0%, #f3f5f8 100%);
+    text-align:left;
+    align-items:center;
+    box-shadow:var(--soft);
+  }
+
+  .num{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:900;
+    color:#fff;
+    background:linear-gradient(180deg,#243f65,#172b4d);
+    flex:0 0 30px;
+  }
+
+  .step b{
+    font-size:12px;
+    line-height:1.4;
+    font-weight:800;
+    color:#111827;
+  }
+
+  .btn{
+    width:100%;
+    height:52px;
+    margin-top:16px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-weight:900;
+    font-size:13px;
+    letter-spacing:.08em;
+    background:linear-gradient(180deg,#243f65,#172b4d);
+    text-decoration:none;
+    box-shadow:0 14px 26px rgba(23,43,77,.22);
+    transition:transform .2s ease, background .2s ease;
+  }
+
+  .btn:hover{
+    transform:translateY(-1px);
+    background:var(--brand);
+  }
+
+  .btn:focus-visible,.faq-q:focus-visible{
+    outline:3px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  .fineprint{
+    font-size:10px;
+    line-height:1.45;
+    color:var(--muted);
+    margin-top:10px;
+  }
+
+  .faq-title{
+    margin:20px 0 10px;
+    font-size:17px;
+    font-weight:900;
+    text-align:left;
+    color:var(--dark);
+    letter-spacing:-.02em;
+  }
+
+  .faq{
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    background:#fff;
+  }
+
+  .faq-item + .faq-item{
+    border-top:1px solid var(--border);
+  }
+
+  .faq-q{
+    padding:14px;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    border:none;
+    background:none;
+    text-align:left;
+    color:#111827;
+  }
+
+  .faq-q::after{
+    content:"+";
+    font-size:18px;
+    color:var(--accent);
+    margin-left:12px;
+  }
+
+  .faq-item.open .faq-q::after{
+    content:"\2212";
+  }
+
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    padding:0 14px;
+  }
+
+  .faq-a p{
+    font-size:11px;
+    line-height:1.5;
+    color:var(--muted);
+    padding-bottom:12px;
+    margin:0;
+  }
+
+  .faq-item.open .faq-a{
+    max-height:180px;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <div class="container">
+
+      <div class="brand">Aéropostale</div>
+      <div class="brand-underline"></div>
+
+      <h1>Complete Your Registration</h1>
+
+      <p class="sub">
+        Follow these simple steps to complete your registration and access your exclusive offer.
+      </p>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="num">1</div>
+          <b>Click on "Claim Now"</b>
+        </div>
+
+        <div class="step">
+          <div class="num">2</div>
+          <b>Enter your email and basic information</b>
+        </div>
+
+        <div class="step">
+          <div class="num">3</div>
+          <b>Complete 4–6 sponsored deals</b>
+        </div>
+
+        <div class="step">
+          <div class="num">4</div>
+          <b>Enjoy your exclusive offer</b>
+        </div>
+
+      </div>
+
+      <a class="btn" href="https://blitzrewarded.com/o/189/572779">
+        CLAIM NOW
+      </a>
+
+      <div class="fineprint">
+        By clicking "Claim Now", you agree to complete the required steps shown to access your offer.
+      </div>
+
+      <div class="faq-title">
+        Frequently Asked Questions
+      </div>
+
+      <div class="faq">
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">How long does it take?</button>
+          <div class="faq-a">
+            <p>
+              Most users finish within a few minutes depending on the available offers.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">What are sponsored deals?</button>
+          <div class="faq-a">
+            <p>
+              These are random tasks to test like apps/games, surveys, filling out forms.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">How many offers do I complete?</button>
+          <div class="faq-a">
+            <p>
+              Typically between 4–6 offers depending on eligibility requirements.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">When is access processed?</button>
+          <div class="faq-a">
+            <p>
+              Processing times may vary, but most users receive confirmation within 24–48 hours.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Accordion behaviour for the FAQ section
+    const items = document.querySelectorAll(".faq-item");
+
+    items.forEach(item => {
+      const btn = item.querySelector(".faq-q");
+      btn.setAttribute("aria-expanded", "false");
+
+      btn.addEventListener("click", () => {
+        const isOpen = item.classList.toggle("open");
+        btn.setAttribute("aria-expanded", String(isOpen));
+      });
+    });
+  </script>
+
+</body>
+</html>
